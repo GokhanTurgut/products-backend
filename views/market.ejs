@@ -2,6 +2,15 @@
 <%- include('includes/navigation.ejs') %>
 <main>
   <h1 class="index--h1">Welcome to the market!</h1>
+  <% if (products.length > 0) { %>
+    <ul>
+      <% products.forEach(product => { %>
+        <li><%= product.title %></li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <h2>No products found!</h2>
+  <% } %>
 </main>
 </body>
 </html>
