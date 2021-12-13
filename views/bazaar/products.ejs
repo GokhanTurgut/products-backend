@@ -1,0 +1,16 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<%- include('../includes/navigation.ejs') %>
+<main>
+  <% if (products.length > 0) { %>
+    <ul>
+      <% products.forEach(product => { %>
+        <li><%= product.title %></li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <h2>No products found!</h2>
+  <% } %>
+</main>
+</body>
+</html>

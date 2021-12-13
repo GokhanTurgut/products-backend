@@ -1,0 +1,25 @@
+.add-product--main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.form--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form--item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form--item > input,
+.form--item > textarea {
+  min-width: 20rem;
+}

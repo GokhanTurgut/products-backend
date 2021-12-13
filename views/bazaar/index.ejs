@@ -1,7 +1,9 @@
-<%- include('includes/head.ejs') %> 
-<%- include('includes/navigation.ejs') %>
+<%- include('../includes/head.ejs') %>
+  <link rel="stylesheet" href="/css/index.css"/>
+</head>
+<%- include('../includes/navigation.ejs') %>
 <main>
-  <h1 class="index--h1">Welcome to the market!</h1>
+  <h1 class="index--h1">Welcome to the bazaar!</h1>
   <% if (products.length > 0) { %>
     <ul>
       <% products.forEach(product => { %>

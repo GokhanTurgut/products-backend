@@ -7,15 +7,15 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-const marketRoute = require("./routes/market");
-const adminData = require("./routes/admin");
+const bazaarRoute = require("./routes/bazaar");
+const adminRoute = require("./routes/admin");
 const errorController = require('./controllers/error');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(marketRoute);
-app.use(adminData.routes);
+app.use(bazaarRoute);
+app.use('/admin', adminRoute);
 
 app.use(errorController.get404);
 
