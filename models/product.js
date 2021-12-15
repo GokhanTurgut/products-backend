@@ -1,7 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-
-const dataPath = path.join(__dirname, "..", "data", "products.json");
+const getDb = require("../util/database").getDb;
 
 module.exports = class Product {
   constructor(title, imageUrl, price, description) {
@@ -12,27 +9,30 @@ module.exports = class Product {
   }
 
   save() {
-    readProducts().then((products) => {
-      products.push(this);
-      fs.writeFile(dataPath, JSON.stringify(products), (error) => {
+    const db = getDb();
+    return db
+      .collection("products")
+      .insertOne(this)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
         console.log(error);
       });
-    });
   }
 
   static fetchAll() {
-    return readProducts();
+    const db = getDb();
+    return db
+      .collection("products")
+      .find()
+      .toArray()
+      .then((products) => {
+        console.log(products);
+        return products;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 };
-
-function readProducts() {
-  return new Promise((resolve) => {
-    fs.readFile(dataPath, (err, data) => {
-      if (err) {
-        resolve([]);
-      } else {
-        resolve(JSON.parse(data));
-      }
-    });
-  });
-}

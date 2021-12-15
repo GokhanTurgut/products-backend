@@ -7,16 +7,19 @@ const app = express();
 
 app.set("view engine", "ejs");
 
+const mongoConnect = require("./util/database").mongoConnect;
 const bazaarRoute = require("./routes/bazaar");
 const adminRoute = require("./routes/admin");
-const errorController = require('./controllers/error');
+const errorController = require("./controllers/error");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(bazaarRoute);
-app.use('/admin', adminRoute);
+app.use("/admin", adminRoute);
 
 app.use(errorController.get404);
 
-app.listen(3000);
+mongoConnect(() => {
+  app.listen(3000);
+});
