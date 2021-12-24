@@ -1,38 +1,51 @@
-const getDb = require("../util/database").getDb;
+const mongoose = require("mongoose");
 
-module.exports = class Product {
-  constructor(title, imageUrl, price, description) {
-    this.title = title;
-    this.imageUrl = imageUrl;
-    this.price = price;
-    this.description = description;
-  }
+const Schema = mongoose.Schema;
 
-  save() {
-    const db = getDb();
-    return db
-      .collection("products")
-      .insertOne(this)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+const productSchema = new Schema({
+  title: String,
+  imageUrl: String,
+  price: Number,
+  description: String,
+});
 
-  static fetchAll() {
-    const db = getDb();
-    return db
-      .collection("products")
-      .find()
-      .toArray()
-      .then((products) => {
-        console.log(products);
-        return products;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-};
+module.exports = mongoose.model('Product', productSchema);
+
+// const getDb = require("../util/database").getDb;
+
+// module.exports = class Product {
+//   constructor(title, imageUrl, price, description) {
+//     this.title = title;
+//     this.imageUrl = imageUrl;
+//     this.price = price;
+//     this.description = description;
+//   }
+
+//   save() {
+//     const db = getDb();
+//     return db
+//       .collection("products")
+//       .insertOne(this)
+//       .then((result) => {
+//         console.log(result);
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   }
+
+//   static fetchAll() {
+//     const db = getDb();
+//     return db
+//       .collection("products")
+//       .find()
+//       .toArray()
+//       .then((products) => {
+//         console.log(products);
+//         return products;
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   }
+// };
